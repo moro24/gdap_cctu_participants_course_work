@@ -1,0 +1,2553 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "90607785-bccb-44e9-b926-e33cea9217a8",
+   "metadata": {},
+   "source": [
+    "# Importing Libraries"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "3547f321-b614-479c-b17a-854e1213214e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import pandas as pd\n",
+    "import numpy as np"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "6b1536d4-c9cf-4481-8b7d-c63f50a8aa95",
+   "metadata": {},
+   "source": [
+    "# Reading/Loading and Creating a Copy Of Dataset"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "e5713b51-fb1e-4843-9656-b0304af42cd3",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Unnamed: 0</th>\n",
+       "      <th>Price</th>\n",
+       "      <th>Age</th>\n",
+       "      <th>KM</th>\n",
+       "      <th>FuelType</th>\n",
+       "      <th>HP</th>\n",
+       "      <th>MetColor</th>\n",
+       "      <th>Automatic</th>\n",
+       "      <th>CC</th>\n",
+       "      <th>Doors</th>\n",
+       "      <th>Weight</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>0</td>\n",
+       "      <td>13500</td>\n",
+       "      <td>23.0</td>\n",
+       "      <td>46986</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>90</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>three</td>\n",
+       "      <td>1165</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>1</td>\n",
+       "      <td>13750</td>\n",
+       "      <td>23.0</td>\n",
+       "      <td>72937</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>90</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1165</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>2</td>\n",
+       "      <td>13950</td>\n",
+       "      <td>24.0</td>\n",
+       "      <td>41711</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>90</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1165</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>3</td>\n",
+       "      <td>14950</td>\n",
+       "      <td>26.0</td>\n",
+       "      <td>48000</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>90</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1165</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>4</td>\n",
+       "      <td>13750</td>\n",
+       "      <td>30.0</td>\n",
+       "      <td>38500</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>90</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1170</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>...</th>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1431</th>\n",
+       "      <td>1431</td>\n",
+       "      <td>7500</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>20544</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>86</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1300</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1025</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1432</th>\n",
+       "      <td>1432</td>\n",
+       "      <td>10845</td>\n",
+       "      <td>72.0</td>\n",
+       "      <td>??</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>86</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1300</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1015</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1433</th>\n",
+       "      <td>1433</td>\n",
+       "      <td>8500</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>17016</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>86</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1300</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1015</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1434</th>\n",
+       "      <td>1434</td>\n",
+       "      <td>7250</td>\n",
+       "      <td>70.0</td>\n",
+       "      <td>??</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>86</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1300</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1015</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1435</th>\n",
+       "      <td>1435</td>\n",
+       "      <td>6950</td>\n",
+       "      <td>76.0</td>\n",
+       "      <td>1</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>110</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1600</td>\n",
+       "      <td>5</td>\n",
+       "      <td>1114</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "<p>1436 rows × 11 columns</p>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      Unnamed: 0  Price   Age     KM FuelType   HP  MetColor  Automatic    CC  \\\n",
+       "0              0  13500  23.0  46986   Diesel   90       1.0          0  2000   \n",
+       "1              1  13750  23.0  72937   Diesel   90       1.0          0  2000   \n",
+       "2              2  13950  24.0  41711   Diesel   90       NaN          0  2000   \n",
+       "3              3  14950  26.0  48000   Diesel   90       0.0          0  2000   \n",
+       "4              4  13750  30.0  38500   Diesel   90       0.0          0  2000   \n",
+       "...          ...    ...   ...    ...      ...  ...       ...        ...   ...   \n",
+       "1431        1431   7500   NaN  20544   Petrol   86       1.0          0  1300   \n",
+       "1432        1432  10845  72.0     ??   Petrol   86       0.0          0  1300   \n",
+       "1433        1433   8500   NaN  17016   Petrol   86       0.0          0  1300   \n",
+       "1434        1434   7250  70.0     ??      NaN   86       1.0          0  1300   \n",
+       "1435        1435   6950  76.0      1   Petrol  110       0.0          0  1600   \n",
+       "\n",
+       "      Doors  Weight  \n",
+       "0     three    1165  \n",
+       "1         3    1165  \n",
+       "2         3    1165  \n",
+       "3         3    1165  \n",
+       "4         3    1170  \n",
+       "...     ...     ...  \n",
+       "1431      3    1025  \n",
+       "1432      3    1015  \n",
+       "1433      3    1015  \n",
+       "1434      3    1015  \n",
+       "1435      5    1114  \n",
+       "\n",
+       "[1436 rows x 11 columns]"
+      ]
+     },
+     "execution_count": 2,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "data = pd.read_csv(\"Datasets/Toyota.csv\")\n",
+    "data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "f7f0703e-b8d4-4fdb-9b22-7692f6b8d8a6",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Unnamed: 0</th>\n",
+       "      <th>Price</th>\n",
+       "      <th>Age</th>\n",
+       "      <th>KM</th>\n",
+       "      <th>FuelType</th>\n",
+       "      <th>HP</th>\n",
+       "      <th>MetColor</th>\n",
+       "      <th>Automatic</th>\n",
+       "      <th>CC</th>\n",
+       "      <th>Doors</th>\n",
+       "      <th>Weight</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>0</td>\n",
+       "      <td>13500</td>\n",
+       "      <td>23.0</td>\n",
+       "      <td>46986</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>90</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>three</td>\n",
+       "      <td>1165</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>1</td>\n",
+       "      <td>13750</td>\n",
+       "      <td>23.0</td>\n",
+       "      <td>72937</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>90</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1165</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>2</td>\n",
+       "      <td>13950</td>\n",
+       "      <td>24.0</td>\n",
+       "      <td>41711</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>90</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1165</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>3</td>\n",
+       "      <td>14950</td>\n",
+       "      <td>26.0</td>\n",
+       "      <td>48000</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>90</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1165</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>4</td>\n",
+       "      <td>13750</td>\n",
+       "      <td>30.0</td>\n",
+       "      <td>38500</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>90</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1170</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>5</td>\n",
+       "      <td>12950</td>\n",
+       "      <td>32.0</td>\n",
+       "      <td>61000</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>90</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1170</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>6</th>\n",
+       "      <td>6</td>\n",
+       "      <td>16900</td>\n",
+       "      <td>27.0</td>\n",
+       "      <td>??</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>????</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1245</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>7</th>\n",
+       "      <td>7</td>\n",
+       "      <td>18600</td>\n",
+       "      <td>30.0</td>\n",
+       "      <td>75889</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>90</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1245</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>8</th>\n",
+       "      <td>8</td>\n",
+       "      <td>21500</td>\n",
+       "      <td>27.0</td>\n",
+       "      <td>19700</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>192</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1800</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1185</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>9</th>\n",
+       "      <td>9</td>\n",
+       "      <td>12950</td>\n",
+       "      <td>23.0</td>\n",
+       "      <td>71138</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>????</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1900</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1105</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   Unnamed: 0  Price   Age     KM FuelType    HP  MetColor  Automatic    CC  \\\n",
+       "0           0  13500  23.0  46986   Diesel    90       1.0          0  2000   \n",
+       "1           1  13750  23.0  72937   Diesel    90       1.0          0  2000   \n",
+       "2           2  13950  24.0  41711   Diesel    90       NaN          0  2000   \n",
+       "3           3  14950  26.0  48000   Diesel    90       0.0          0  2000   \n",
+       "4           4  13750  30.0  38500   Diesel    90       0.0          0  2000   \n",
+       "5           5  12950  32.0  61000   Diesel    90       0.0          0  2000   \n",
+       "6           6  16900  27.0     ??   Diesel  ????       NaN          0  2000   \n",
+       "7           7  18600  30.0  75889      NaN    90       1.0          0  2000   \n",
+       "8           8  21500  27.0  19700   Petrol   192       0.0          0  1800   \n",
+       "9           9  12950  23.0  71138   Diesel  ????       NaN          0  1900   \n",
+       "\n",
+       "   Doors  Weight  \n",
+       "0  three    1165  \n",
+       "1      3    1165  \n",
+       "2      3    1165  \n",
+       "3      3    1165  \n",
+       "4      3    1170  \n",
+       "5      3    1170  \n",
+       "6      3    1245  \n",
+       "7      3    1245  \n",
+       "8      3    1185  \n",
+       "9      3    1105  "
+      ]
+     },
+     "execution_count": 3,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Creating a deep copy of the dataset\n",
+    "df1 = data.copy(deep = True)\n",
+    "df1.head(10)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "0bcec08f-8455-4f47-8b41-60923c29c95f",
+   "metadata": {},
+   "source": [
+    "# Understanding Dataset"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "e73a89fd-f8b4-41fa-a042-7513b9179afa",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Unnamed: 0</th>\n",
+       "      <th>Price</th>\n",
+       "      <th>Age</th>\n",
+       "      <th>KM</th>\n",
+       "      <th>FuelType</th>\n",
+       "      <th>HP</th>\n",
+       "      <th>MetColor</th>\n",
+       "      <th>Automatic</th>\n",
+       "      <th>CC</th>\n",
+       "      <th>Doors</th>\n",
+       "      <th>Weight</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>0</td>\n",
+       "      <td>13500</td>\n",
+       "      <td>23.0</td>\n",
+       "      <td>46986</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>90</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>three</td>\n",
+       "      <td>1165</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>1</td>\n",
+       "      <td>13750</td>\n",
+       "      <td>23.0</td>\n",
+       "      <td>72937</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>90</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1165</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>2</td>\n",
+       "      <td>13950</td>\n",
+       "      <td>24.0</td>\n",
+       "      <td>41711</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>90</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1165</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>3</td>\n",
+       "      <td>14950</td>\n",
+       "      <td>26.0</td>\n",
+       "      <td>48000</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>90</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1165</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>4</td>\n",
+       "      <td>13750</td>\n",
+       "      <td>30.0</td>\n",
+       "      <td>38500</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>90</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1170</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   Unnamed: 0  Price   Age     KM FuelType  HP  MetColor  Automatic    CC  \\\n",
+       "0           0  13500  23.0  46986   Diesel  90       1.0          0  2000   \n",
+       "1           1  13750  23.0  72937   Diesel  90       1.0          0  2000   \n",
+       "2           2  13950  24.0  41711   Diesel  90       NaN          0  2000   \n",
+       "3           3  14950  26.0  48000   Diesel  90       0.0          0  2000   \n",
+       "4           4  13750  30.0  38500   Diesel  90       0.0          0  2000   \n",
+       "\n",
+       "   Doors  Weight  \n",
+       "0  three    1165  \n",
+       "1      3    1165  \n",
+       "2      3    1165  \n",
+       "3      3    1165  \n",
+       "4      3    1170  "
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Display first five rows\n",
+    "df1.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "bdc6ef90-fb18-4730-9ac0-3d437ce02c4d",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Unnamed: 0</th>\n",
+       "      <th>Price</th>\n",
+       "      <th>Age</th>\n",
+       "      <th>KM</th>\n",
+       "      <th>FuelType</th>\n",
+       "      <th>HP</th>\n",
+       "      <th>MetColor</th>\n",
+       "      <th>Automatic</th>\n",
+       "      <th>CC</th>\n",
+       "      <th>Doors</th>\n",
+       "      <th>Weight</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>1431</th>\n",
+       "      <td>1431</td>\n",
+       "      <td>7500</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>20544</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>86</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1300</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1025</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1432</th>\n",
+       "      <td>1432</td>\n",
+       "      <td>10845</td>\n",
+       "      <td>72.0</td>\n",
+       "      <td>??</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>86</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1300</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1015</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1433</th>\n",
+       "      <td>1433</td>\n",
+       "      <td>8500</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>17016</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>86</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1300</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1015</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1434</th>\n",
+       "      <td>1434</td>\n",
+       "      <td>7250</td>\n",
+       "      <td>70.0</td>\n",
+       "      <td>??</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>86</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1300</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1015</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1435</th>\n",
+       "      <td>1435</td>\n",
+       "      <td>6950</td>\n",
+       "      <td>76.0</td>\n",
+       "      <td>1</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>110</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1600</td>\n",
+       "      <td>5</td>\n",
+       "      <td>1114</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      Unnamed: 0  Price   Age     KM FuelType   HP  MetColor  Automatic    CC  \\\n",
+       "1431        1431   7500   NaN  20544   Petrol   86       1.0          0  1300   \n",
+       "1432        1432  10845  72.0     ??   Petrol   86       0.0          0  1300   \n",
+       "1433        1433   8500   NaN  17016   Petrol   86       0.0          0  1300   \n",
+       "1434        1434   7250  70.0     ??      NaN   86       1.0          0  1300   \n",
+       "1435        1435   6950  76.0      1   Petrol  110       0.0          0  1600   \n",
+       "\n",
+       "     Doors  Weight  \n",
+       "1431     3    1025  \n",
+       "1432     3    1015  \n",
+       "1433     3    1015  \n",
+       "1434     3    1015  \n",
+       "1435     5    1114  "
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Display last ten rows\n",
+    "df1.tail()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "404e62f7-af44-4ce4-8c49-d48e51053823",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Unnamed: 0</th>\n",
+       "      <th>Price</th>\n",
+       "      <th>Age</th>\n",
+       "      <th>KM</th>\n",
+       "      <th>FuelType</th>\n",
+       "      <th>HP</th>\n",
+       "      <th>MetColor</th>\n",
+       "      <th>Automatic</th>\n",
+       "      <th>CC</th>\n",
+       "      <th>Doors</th>\n",
+       "      <th>Weight</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>0</td>\n",
+       "      <td>13500</td>\n",
+       "      <td>23.0</td>\n",
+       "      <td>46986</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>90</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>three</td>\n",
+       "      <td>1165</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>1</td>\n",
+       "      <td>13750</td>\n",
+       "      <td>23.0</td>\n",
+       "      <td>72937</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>90</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1165</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>2</td>\n",
+       "      <td>13950</td>\n",
+       "      <td>24.0</td>\n",
+       "      <td>41711</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>90</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1165</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>3</td>\n",
+       "      <td>14950</td>\n",
+       "      <td>26.0</td>\n",
+       "      <td>48000</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>90</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1165</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>4</td>\n",
+       "      <td>13750</td>\n",
+       "      <td>30.0</td>\n",
+       "      <td>38500</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>90</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>2000</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1170</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   Unnamed: 0  Price   Age     KM FuelType  HP  MetColor  Automatic    CC  \\\n",
+       "0           0  13500  23.0  46986   Diesel  90       1.0          0  2000   \n",
+       "1           1  13750  23.0  72937   Diesel  90       1.0          0  2000   \n",
+       "2           2  13950  24.0  41711   Diesel  90       NaN          0  2000   \n",
+       "3           3  14950  26.0  48000   Diesel  90       0.0          0  2000   \n",
+       "4           4  13750  30.0  38500   Diesel  90       0.0          0  2000   \n",
+       "\n",
+       "   Doors  Weight  \n",
+       "0  three    1165  \n",
+       "1      3    1165  \n",
+       "2      3    1165  \n",
+       "3      3    1165  \n",
+       "4      3    1170  "
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Display x number of rows\n",
+    "df1.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "69c54e94-5e9b-43e1-8272-f353cb3d5110",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Unnamed: 0</th>\n",
+       "      <th>Price</th>\n",
+       "      <th>Age</th>\n",
+       "      <th>KM</th>\n",
+       "      <th>FuelType</th>\n",
+       "      <th>HP</th>\n",
+       "      <th>MetColor</th>\n",
+       "      <th>Automatic</th>\n",
+       "      <th>CC</th>\n",
+       "      <th>Doors</th>\n",
+       "      <th>Weight</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>1431</th>\n",
+       "      <td>1431</td>\n",
+       "      <td>7500</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>20544</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>86</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1300</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1025</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1432</th>\n",
+       "      <td>1432</td>\n",
+       "      <td>10845</td>\n",
+       "      <td>72.0</td>\n",
+       "      <td>??</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>86</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1300</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1015</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1433</th>\n",
+       "      <td>1433</td>\n",
+       "      <td>8500</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>17016</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>86</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1300</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1015</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1434</th>\n",
+       "      <td>1434</td>\n",
+       "      <td>7250</td>\n",
+       "      <td>70.0</td>\n",
+       "      <td>??</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>86</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1300</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1015</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1435</th>\n",
+       "      <td>1435</td>\n",
+       "      <td>6950</td>\n",
+       "      <td>76.0</td>\n",
+       "      <td>1</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>110</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1600</td>\n",
+       "      <td>5</td>\n",
+       "      <td>1114</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      Unnamed: 0  Price   Age     KM FuelType   HP  MetColor  Automatic    CC  \\\n",
+       "1431        1431   7500   NaN  20544   Petrol   86       1.0          0  1300   \n",
+       "1432        1432  10845  72.0     ??   Petrol   86       0.0          0  1300   \n",
+       "1433        1433   8500   NaN  17016   Petrol   86       0.0          0  1300   \n",
+       "1434        1434   7250  70.0     ??      NaN   86       1.0          0  1300   \n",
+       "1435        1435   6950  76.0      1   Petrol  110       0.0          0  1600   \n",
+       "\n",
+       "     Doors  Weight  \n",
+       "1431     3    1025  \n",
+       "1432     3    1015  \n",
+       "1433     3    1015  \n",
+       "1434     3    1015  \n",
+       "1435     5    1114  "
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1.tail()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "1c1334f8-b7eb-4f70-8dac-93fa3b18938d",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Index(['Unnamed: 0', 'Price', 'Age', 'KM', 'FuelType', 'HP', 'MetColor',\n",
+       "       'Automatic', 'CC', 'Doors', 'Weight'],\n",
+       "      dtype='object')"
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1.columns"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "43e9e041-262a-4ba0-af06-f7164f699ac4",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Unnamed: 0\n",
+      "Price\n",
+      "Age\n",
+      "KM\n",
+      "FuelType\n",
+      "HP\n",
+      "MetColor\n",
+      "Automatic\n",
+      "CC\n",
+      "Doors\n",
+      "Weight\n"
+     ]
+    }
+   ],
+   "source": [
+    "for each_item in df1.columns:\n",
+    "    print(each_item)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "8f16a0fb-94a5-4282-bdd8-3edec841956f",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0       13500\n",
+       "1       13750\n",
+       "2       13950\n",
+       "3       14950\n",
+       "4       13750\n",
+       "        ...  \n",
+       "1431     7500\n",
+       "1432    10845\n",
+       "1433     8500\n",
+       "1434     7250\n",
+       "1435     6950\n",
+       "Name: Price, Length: 1436, dtype: int64"
+      ]
+     },
+     "execution_count": 10,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1['Price']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "84dc6266-2086-4b38-b683-b421ecda2357",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0    23.0\n",
+       "1    23.0\n",
+       "2    24.0\n",
+       "3    26.0\n",
+       "4    30.0\n",
+       "Name: Age, dtype: float64"
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1['Age'].head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "84c1c895-50cf-4326-aeea-1fd86ffab849",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "1431    20544\n",
+       "1432       ??\n",
+       "1433    17016\n",
+       "1434       ??\n",
+       "1435        1\n",
+       "Name: KM, dtype: object"
+      ]
+     },
+     "execution_count": 12,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1['KM'].tail()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "e678d5de-b090-49d3-9a64-f55c1973f46c",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "np.int64(13750)"
+      ]
+     },
+     "execution_count": 13,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Access a single value from a row/column by their indexes\n",
+    "df1.at[1, 'Price']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "id": "7b156156-c622-4aac-83a3-31bf903f4ddc",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "np.int64(13750)"
+      ]
+     },
+     "execution_count": 14,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1.iat[1,1]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "id": "11ab8184-2561-4f56-ab19-5994e32e6659",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "10    20950\n",
+       "11    19950\n",
+       "12    19600\n",
+       "13    21500\n",
+       "14    22500\n",
+       "15    22000\n",
+       "16    22750\n",
+       "17    17950\n",
+       "18    16750\n",
+       "19    16950\n",
+       "20    15950\n",
+       "Name: Price, dtype: int64"
+      ]
+     },
+     "execution_count": 15,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Accessing a group of rows/columns by their label\n",
+    "df1.loc[10:20, 'Price']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "21b55e75-4705-41e5-bcd7-b97542ba3186",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "10    20950\n",
+       "11    19950\n",
+       "12    19600\n",
+       "13    21500\n",
+       "14    22500\n",
+       "15    22000\n",
+       "16    22750\n",
+       "17    17950\n",
+       "18    16750\n",
+       "19    16950\n",
+       "Name: Price, dtype: int64"
+      ]
+     },
+     "execution_count": 16,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1.iloc[10:20, 1]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "0a896153-40b3-4bd5-8af0-313765981e07",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "15796"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Returns the size of the dataset(multiplies rows by columns)\n",
+    "df1.size"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "id": "0b6724d5-3a58-4bde-ab77-adb06372e5ab",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(1436, 11)"
+      ]
+     },
+     "execution_count": 18,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Returns the shape of the dataset in a tuple(in rows followed by a colummn)\n",
+    "df1.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "id": "5db33904-af98-4a01-98f9-02cfec37fd49",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Number of rows: 1436\n",
+      "Number of columns: 11\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Accessing an element in a tuple\n",
+    "x = df1.shape[0]\n",
+    "y = df1.shape[1]\n",
+    "print(f\"Number of rows: {x}\\nNumber of columns: {y}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "id": "3352118f-3a3b-4b54-bb19-d76bd189db1b",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "<class 'pandas.core.frame.DataFrame'>\n",
+      "RangeIndex: 1436 entries, 0 to 1435\n",
+      "Data columns (total 11 columns):\n",
+      " #   Column      Non-Null Count  Dtype  \n",
+      "---  ------      --------------  -----  \n",
+      " 0   Unnamed: 0  1436 non-null   int64  \n",
+      " 1   Price       1436 non-null   int64  \n",
+      " 2   Age         1336 non-null   float64\n",
+      " 3   KM          1436 non-null   object \n",
+      " 4   FuelType    1336 non-null   object \n",
+      " 5   HP          1436 non-null   object \n",
+      " 6   MetColor    1286 non-null   float64\n",
+      " 7   Automatic   1436 non-null   int64  \n",
+      " 8   CC          1436 non-null   int64  \n",
+      " 9   Doors       1436 non-null   object \n",
+      " 10  Weight      1436 non-null   int64  \n",
+      "dtypes: float64(2), int64(5), object(4)\n",
+      "memory usage: 123.5+ KB\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Return a concise summary of a dataset\n",
+    "df1.info()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "1bfa4d57-92ce-4bd3-833a-66be32ba5c92",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Unnamed: 0      int64\n",
+       "Price           int64\n",
+       "Age           float64\n",
+       "KM             object\n",
+       "FuelType       object\n",
+       "HP             object\n",
+       "MetColor      float64\n",
+       "Automatic       int64\n",
+       "CC              int64\n",
+       "Doors          object\n",
+       "Weight          int64\n",
+       "dtype: object"
+      ]
+     },
+     "execution_count": 21,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Return columns and their data types\n",
+    "df1.dtypes"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "id": "b01e1aad-efa9-4230-a13c-cb1e368e3228",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Unnamed: 0    1436\n",
+       "Price          236\n",
+       "Age             77\n",
+       "KM            1256\n",
+       "FuelType         3\n",
+       "HP              13\n",
+       "MetColor         2\n",
+       "Automatic        2\n",
+       "CC              12\n",
+       "Doors            7\n",
+       "Weight          59\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 22,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Return the number of unique values in each column\n",
+    "df1.nunique()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "id": "4391f393-91f4-466e-98b2-5d4758af189e",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([13500, 13750, 13950, 14950, 12950, 16900, 18600, 21500, 20950,\n",
+       "       19950, 19600, 22500, 22000, 22750, 17950, 16750, 16950, 15950,\n",
+       "       16250, 17495, 15750, 15500, 14750, 19000, 15800, 21950, 20500,\n",
+       "       13250, 15250, 18950, 15999, 16500, 18750, 22250, 12995, 18450,\n",
+       "       16895, 14900, 17250, 15450, 16650, 17450, 16450, 18900, 18990,\n",
+       "       18500, 19450, 18800, 32500, 31000, 31275, 24950, 22950, 24990,\n",
+       "       17900, 19250, 16350, 21750, 15850, 23000, 19900, 23950, 24500,\n",
+       "       17200, 19500, 16868, 19750, 20750, 17650, 17795, 18245, 23750,\n",
+       "       18700, 21125,  6950,  9500, 11950,  7750,  4350,  4750, 11750,\n",
+       "       11900,  9950, 11495, 11250, 10500, 10450, 11500, 12500, 10950,\n",
+       "       11450, 11790, 12450, 11690, 12750, 11925, 12900, 11650, 10850,\n",
+       "        9940, 13450, 12495, 12000, 11480, 14990, 12850, 11700, 11895,\n",
+       "       13875, 12295, 13995,  9900, 11990, 10750, 11695, 11000, 12400,\n",
+       "       12200, 12695, 14350, 10250,  6500,  6400,  7000,  8900,  8500,\n",
+       "        8950,  9250,  9450,  8250,  4450,  9000,  5150,  7900, 10900,\n",
+       "        9750, 11290, 10895, 10995,  9850,  8695, 10990,  8750,  9930,\n",
+       "        9799,  9700,  9990,  9475, 10000, 10495,  9400,  9650,  9550,\n",
+       "       13000, 11710,  9980, 12250, 11930, 10800, 10600,  7500,  5950,\n",
+       "        6900,  5751,  7950,  6250,  8450,  7350,  9800,  7995,  8600,\n",
+       "        7250,  8000,  8495,  9895,  7999,  8490,  8150,  7450,  9130,\n",
+       "        8990,  8995,  9995, 10400,  8800,  7800,  8100,  8200, 10295,\n",
+       "        9795, 10350,  8400,  8895,  9390,  8745,  8850,  9695,  9245,\n",
+       "        5900,  6000,  5250,  4400,  6750,  6150,  5750,  5800,  5740,\n",
+       "        6550,  6450,  5600,  6650,  7600,  7460,  6800,  8700,  6640,\n",
+       "        8050,  7795,  6490,  6425,  6495,  6990,  7200,  7300,  9200,\n",
+       "        7850,  7495,  7990,  7490,  7145,  7400,  6999,  7499,  7150,\n",
+       "        5845, 10845])"
+      ]
+     },
+     "execution_count": 23,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Return all the unique values in every column\n",
+    "df1['Price'].unique()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "id": "51380ab8-4862-449a-ad1e-c0526ff3e09e",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([23., 24., 26., 30., 32., 27., 25., 22., 31., 28., 29., nan, 20.,\n",
+       "       19., 17., 11., 18., 13., 14.,  4.,  8.,  7., 16., 15., 10., 12.,\n",
+       "        9.,  6.,  2.,  1., 43., 38., 40., 44., 41., 37., 39., 42., 35.,\n",
+       "       34., 33., 36., 53., 51., 54., 45., 55., 48., 52., 49., 56., 50.,\n",
+       "       47., 46., 58., 68., 59., 62., 65., 67., 64., 60., 61., 66., 57.,\n",
+       "       63., 73., 79., 78., 74., 77., 69., 80., 76., 70., 71., 75., 72.])"
+      ]
+     },
+     "execution_count": 24,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1['Age'].unique()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "id": "cab213a1-6ce0-407d-a0c6-3136744acd81",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array(['Diesel', nan, 'Petrol', 'CNG'], dtype=object)"
+      ]
+     },
+     "execution_count": 25,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1['FuelType'].unique()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "id": "b047e19f-15a5-46b9-a4eb-1ea79d41bb1b",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array(['46986', '72937', '41711', ..., '30964', '20544', '17016'],\n",
+       "      dtype=object)"
+      ]
+     },
+     "execution_count": 26,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1['KM'].unique()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "id": "32bf6003-edbc-44b7-b2b7-7a789f32ae8d",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([ 1., nan,  0.])"
+      ]
+     },
+     "execution_count": 27,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1['MetColor'].unique()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "id": "063f2c8a-b23c-452e-84bb-31e841b7ff01",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([0, 1])"
+      ]
+     },
+     "execution_count": 28,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1['Automatic'].unique()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "id": "6d4bf799-97eb-41f6-947c-1b748232e063",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([2000, 1800, 1900, 1600, 1400, 1598, 1995, 1398, 1300, 1587, 1975,\n",
+       "       1332])"
+      ]
+     },
+     "execution_count": 29,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1['CC'].unique()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "id": "a8288b68-feb4-40ee-81c8-ea7acbeaf959",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array(['three', '3', '5', '4', 'four', 'five', '2'], dtype=object)"
+      ]
+     },
+     "execution_count": 30,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1['Doors'].unique()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 31,
+   "id": "c05836aa-dabf-4e96-bba5-19aedbb1124a",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([1165, 1170, 1245, 1185, 1105, 1065, 1120, 1100, 1255, 1270, 1110,\n",
+       "       1195, 1180, 1075, 1130, 1275, 1060, 1115, 1265, 1260, 1125, 1155,\n",
+       "       1045, 1480, 1320, 1280, 1135, 1090, 1150, 1085, 1160, 1205, 1084,\n",
+       "       1140, 1095, 1025, 1119, 1080, 1121, 1615, 1067, 1040, 1030, 1055,\n",
+       "       1050, 1103, 1070, 1035, 1015, 1000, 1078, 1079, 1109, 1020, 1010,\n",
+       "       1114, 1172, 1094, 1083])"
+      ]
+     },
+     "execution_count": 31,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1['Weight'].unique()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "id": "4fd80217-e6d8-4c36-82be-8ea40adeba4b",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Unnamed: 0      0\n",
+       "Price           0\n",
+       "Age           100\n",
+       "KM              0\n",
+       "FuelType      100\n",
+       "HP              0\n",
+       "MetColor      150\n",
+       "Automatic       0\n",
+       "CC              0\n",
+       "Doors           0\n",
+       "Weight          0\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 32,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Return the number of missing values in each column\n",
+    "df1.isnull().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "id": "025fd881-4d64-492d-8f4f-5fb95892481b",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Unnamed: 0</th>\n",
+       "      <th>Price</th>\n",
+       "      <th>Age</th>\n",
+       "      <th>KM</th>\n",
+       "      <th>FuelType</th>\n",
+       "      <th>HP</th>\n",
+       "      <th>MetColor</th>\n",
+       "      <th>Automatic</th>\n",
+       "      <th>CC</th>\n",
+       "      <th>Doors</th>\n",
+       "      <th>Weight</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>True</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>...</th>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1431</th>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>True</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1432</th>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1433</th>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>True</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1434</th>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>True</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1435</th>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "<p>1436 rows × 11 columns</p>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      Unnamed: 0  Price    Age     KM  FuelType     HP  MetColor  Automatic  \\\n",
+       "0          False  False  False  False     False  False     False      False   \n",
+       "1          False  False  False  False     False  False     False      False   \n",
+       "2          False  False  False  False     False  False      True      False   \n",
+       "3          False  False  False  False     False  False     False      False   \n",
+       "4          False  False  False  False     False  False     False      False   \n",
+       "...          ...    ...    ...    ...       ...    ...       ...        ...   \n",
+       "1431       False  False   True  False     False  False     False      False   \n",
+       "1432       False  False  False  False     False  False     False      False   \n",
+       "1433       False  False   True  False     False  False     False      False   \n",
+       "1434       False  False  False  False      True  False     False      False   \n",
+       "1435       False  False  False  False     False  False     False      False   \n",
+       "\n",
+       "         CC  Doors  Weight  \n",
+       "0     False  False   False  \n",
+       "1     False  False   False  \n",
+       "2     False  False   False  \n",
+       "3     False  False   False  \n",
+       "4     False  False   False  \n",
+       "...     ...    ...     ...  \n",
+       "1431  False  False   False  \n",
+       "1432  False  False   False  \n",
+       "1433  False  False   False  \n",
+       "1434  False  False   False  \n",
+       "1435  False  False   False  \n",
+       "\n",
+       "[1436 rows x 11 columns]"
+      ]
+     },
+     "execution_count": 33,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Return wherever there is a missing value in a column\n",
+    "df1.isnull()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "b4b95a2c-1440-4db5-9609-3a76581a0f0e",
+   "metadata": {},
+   "source": [
+    "# Data Pre-Processing"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "bfdf5486-dc08-4ac0-8f0b-769e11fa220c",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Replacing special characters"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "id": "467f3e14-59a7-40ae-b4d4-5897dcafa759",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Replacing the special character in KM\n",
+    "df1['KM'] = df1['KM'].replace('??', np.nan)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 35,
+   "id": "ac844a97-3edd-4eb1-805b-09d8ea7d786a",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array(['46986', '72937', '41711', ..., '30964', '20544', '17016'],\n",
+       "      dtype=object)"
+      ]
+     },
+     "execution_count": 35,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1['KM'].unique() #checking if the  change took place"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 36,
+   "id": "fc256aec-723e-438b-ad62-da6f59a93495",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Replacing the special character in HP\n",
+    "df1['HP'] = df1['HP'].replace('????', np.nan)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 37,
+   "id": "6807d1f3-64a6-4edd-b04b-d1fcb7d9d42f",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array(['90', nan, '192', '110', '97', '71', '116', '98', '69', '86', '72',\n",
+       "       '107', '73'], dtype=object)"
+      ]
+     },
+     "execution_count": 37,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1['HP'].unique()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 38,
+   "id": "2c98c966-5de2-4369-92a6-a2acac85f785",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Changing the strings to integer in the Doors column\n",
+    "df1['Doors'] = df1['Doors'].replace('three',3) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 39,
+   "id": "6d8fd0ed-3a2c-438e-ba38-90945ff3dd92",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([3, '3', '5', '4', 'four', 'five', '2'], dtype=object)"
+      ]
+     },
+     "execution_count": 39,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1['Doors'].unique()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 40,
+   "id": "ceeb5ad5-690d-4a6c-9344-18ed9094e917",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df1['Doors'] = df1['Doors'].replace('four',4)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 41,
+   "id": "448b0862-a1b4-4834-9faf-18cc31308761",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([3, '3', '5', '4', 4, 'five', '2'], dtype=object)"
+      ]
+     },
+     "execution_count": 41,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1['Doors'].unique()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 42,
+   "id": "0b5b8a07-1f57-48bb-9d9a-bc81d9cf1d41",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df1['Doors'] = df1['Doors'].replace('five',5)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 43,
+   "id": "6dc0bc78-4171-4db1-84ec-ca419229afe7",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([3, '3', '5', '4', 4, 5, '2'], dtype=object)"
+      ]
+     },
+     "execution_count": 43,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1['Doors'].unique()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "ee53d8e3-1a12-45a2-8877-79dacdeb1801",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Input missing values"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 46,
+   "id": "9a2917ef-ffa5-47dc-9dfe-8702cc4733c1",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "55.67215568862275\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "Unnamed: 0      0\n",
+       "Price           0\n",
+       "Age             0\n",
+       "KM             15\n",
+       "FuelType      100\n",
+       "HP              6\n",
+       "MetColor      150\n",
+       "Automatic       0\n",
+       "CC              0\n",
+       "Doors           0\n",
+       "Weight          0\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 46,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Inputting missing values for Age\n",
+    "mean_age = df1['Age'].mean()  #finding the mean age\n",
+    "print(mean_age)\n",
+    "df1['Age'].fillna(mean_age)  #inserting it into wherever there's Nan\n",
+    "df1['Age'] = df1['Age'].fillna(mean_age)\n",
+    "df1.isnull().sum()  #checking if the change took place"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 48,
+   "id": "5c80715e-410d-4064-bde9-877f1e4a56ef",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "KM\n",
+       "1        8\n",
+       "59000    7\n",
+       "36000    7\n",
+       "43000    7\n",
+       "45000    6\n",
+       "        ..\n",
+       "42000    1\n",
+       "47955    1\n",
+       "47633    1\n",
+       "47400    1\n",
+       "47360    1\n",
+       "Name: count, Length: 1255, dtype: int64"
+      ]
+     },
+     "execution_count": 48,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1['KM'].value_counts() #finding out how many times each entity appears"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 49,
+   "id": "91ab8091-3bf6-468d-9ad3-c567e3614f8f",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Unnamed: 0      0\n",
+       "Price           0\n",
+       "Age             0\n",
+       "KM              0\n",
+       "FuelType      100\n",
+       "HP              6\n",
+       "MetColor      150\n",
+       "Automatic       0\n",
+       "CC              0\n",
+       "Doors           0\n",
+       "Weight          0\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 49,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Inserting the missing values for KM\n",
+    "highest_count = df1['KM'].value_counts().index[0]  #choosing the highest count with it's index\n",
+    "df1['KM'] = df1['KM'].fillna(highest_count)  #inserting the highest count to wherever ther's Nan\n",
+    "df1.isnull().sum() # checking if the change took place"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 52,
+   "id": "5ce4391e-5c55-4cb8-8243-2877e86632cd",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "FuelType\n",
+       "Petrol    1177\n",
+       "Diesel     144\n",
+       "CNG         15\n",
+       "Name: count, dtype: int64"
+      ]
+     },
+     "execution_count": 52,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1['FuelType'].value_counts()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 53,
+   "id": "beacb87f-163a-4249-bb6b-fa53b86f5180",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Unnamed: 0      0\n",
+       "Price           0\n",
+       "Age             0\n",
+       "KM              0\n",
+       "FuelType        0\n",
+       "HP              6\n",
+       "MetColor      150\n",
+       "Automatic       0\n",
+       "CC              0\n",
+       "Doors           0\n",
+       "Weight          0\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 53,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Inserting the missing values for FuelType\n",
+    "highest_count = df1['FuelType'].value_counts().index[0]\n",
+    "df1['FuelType'] = df1['FuelType'].fillna(highest_count)\n",
+    "df1.isnull().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 55,
+   "id": "fe6c90ed-ad2c-4388-9702-b4979b30dc98",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "HP\n",
+       "110    833\n",
+       "86     249\n",
+       "97     164\n",
+       "72      72\n",
+       "90      35\n",
+       "69      33\n",
+       "107     21\n",
+       "192     10\n",
+       "116      9\n",
+       "98       2\n",
+       "71       1\n",
+       "73       1\n",
+       "Name: count, dtype: int64"
+      ]
+     },
+     "execution_count": 55,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1['HP'].value_counts()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 56,
+   "id": "e7962ff9-1e8b-4b08-b10a-d4bf67e3df83",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Unnamed: 0      0\n",
+       "Price           0\n",
+       "Age             0\n",
+       "KM              0\n",
+       "FuelType        0\n",
+       "HP              0\n",
+       "MetColor      150\n",
+       "Automatic       0\n",
+       "CC              0\n",
+       "Doors           0\n",
+       "Weight          0\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 56,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Inserting the missing values for HP\n",
+    "highest_count = df1['HP'].value_counts().index[0]\n",
+    "df1['HP'] = df1['HP'].fillna(highest_count)\n",
+    "df1.isnull().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 57,
+   "id": "81227486-8ecf-46d2-83c1-2ef15780d1fe",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "0.6749611197511665\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "Unnamed: 0    0\n",
+       "Price         0\n",
+       "Age           0\n",
+       "KM            0\n",
+       "FuelType      0\n",
+       "HP            0\n",
+       "MetColor      0\n",
+       "Automatic     0\n",
+       "CC            0\n",
+       "Doors         0\n",
+       "Weight        0\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 57,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "#Inputting the missing value for MetColor\n",
+    "mean_mtc = df1['MetColor'].mean() \n",
+    "print(mean_mtc)\n",
+    "df1['MetColor'].fillna(mean_mtc)\n",
+    "df1['MetColor'] = df1['MetColor'].fillna(mean_mtc)\n",
+    "df1.isnull().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "011bd53d-056a-4777-90c4-4894f0121b80",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Changing data types for the columns"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 58,
+   "id": "7b9e9c8c-24da-44f8-98b7-6e45f1da2f85",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Changing the data type for KM\n",
+    "df1['KM'] = df1['KM'].astype('int64')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 59,
+   "id": "6e42ac2c-fe24-405d-86d4-bbaddeff9642",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Changing the data type for HP\n",
+    "df1['HP'] = df1['HP'].astype('int64')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 60,
+   "id": "e59f6964-7376-4486-a30e-f5a3fdd0ada1",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Changing the data type for Doors\n",
+    "df1['Doors'] = df1['Doors'].astype('int64')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 61,
+   "id": "6724ad8b-b1ce-425e-8886-49b8319fed98",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Unnamed: 0      int64\n",
+       "Price           int64\n",
+       "Age           float64\n",
+       "KM              int64\n",
+       "FuelType       object\n",
+       "HP              int64\n",
+       "MetColor      float64\n",
+       "Automatic       int64\n",
+       "CC              int64\n",
+       "Doors           int64\n",
+       "Weight          int64\n",
+       "dtype: object"
+      ]
+     },
+     "execution_count": 61,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1.dtypes  #Chceking if the changes took effect"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "45340f08-7b54-423a-800d-b8133bcefc98",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.13.0"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
